@@ -1,5 +1,14 @@
 import { useState, useRef, useEffect } from "react";
-import { ChevronLeft, Search, MapPin, Loader2, Trash2, Eye, EyeOff } from "lucide-react";
+import {
+  ChevronLeft,
+  Search,
+  MapPin,
+  Loader2,
+  Trash2,
+  Eye,
+  EyeOff,
+  X,
+} from "lucide-react";
 import { Sidebar } from "@/components/Layout/Sidebar";
 import { useMapStore } from "@/store/mapStore";
 import { MapContainer } from "@/components/map/MapContainer";
@@ -7,6 +16,7 @@ import { MapContainer } from "@/components/map/MapContainer";
 export function SearchSection() {
   const [searchValue, setSearchValue] = useState("");
   const [showAreasList, setShowAreasList] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const {
@@ -20,7 +30,7 @@ export function SearchSection() {
     setDrawingMode,
     setSelectedAoi,
     removeAoi,
-    clearAois
+    clearAois,
   } = useMapStore();
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -52,9 +62,19 @@ export function SearchSection() {
   const handleConfirmAreas = () => {
     if (aois.length > 0) {
       console.log("Confirmed AOIs:", aois);
-      // Here you can add logic to proceed to next step or save
-      alert(`${aois.length} area(s) confirmed!`);
+      setShowConfirmation(true);
     }
+  };
+
+  const handleConfirmationClose = () => {
+    setShowConfirmation(false);
+  };
+
+  const handleConfirmationProceed = () => {
+    console.log("Proceeding with confirmed areas:", aois);
+    setShowConfirmation(false);
+    // Add your logic here for what happens after confirmation
+    // For example: navigate to next step, save data, etc.
   };
 
   // Auto-show areas list when areas are created
@@ -171,7 +191,7 @@ export function SearchSection() {
               You can always edit the shape of the area later
             </p>
             {/* Areas List - Collapsible */}
-           
+
             {/* Areas List - Collapsible */}
             {aois.length > 0 && (
               <div className="border border-gray-200 rounded-lg">
@@ -354,6 +374,83 @@ export function SearchSection() {
           </div>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {showConfirmation && (
+        <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900">
+                Area of Interest Confirmed
+              </h3>
+              <button
+                onClick={handleConfirmationClose}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+              <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mx-auto mb-4">
+                <svg
+                  className="w-6 h-6 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+
+              <p className="text-center text-gray-600 mb-2">
+                Successfully confirmed <strong>{aois.length}</strong> area
+                {aois.length > 1 ? "s" : ""} of interest.
+              </p>
+
+              <div className="bg-gray-50 rounded-lg p-4 mt-4">
+                <h4 className="font-medium text-gray-900 mb-2">
+                  Confirmed Areas:
+                </h4>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  {aois.map((aoi) => (
+                    <li key={aoi.id} className="flex items-center">
+                      <div
+                        className="w-2 h-2 rounded-full mr-2"
+                        style={{ backgroundColor: aoi.color }}
+                      />
+                      {aoi.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="flex gap-3 p-6 border-t border-gray-200">
+              <button
+                onClick={handleConfirmationClose}
+                className="flex-1 py-2 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Edit Areas
+              </button>
+              <button
+                onClick={handleConfirmationProceed}
+                className="flex-1 py-2 px-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+              >
+                Proceed
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
