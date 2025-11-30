@@ -1,0 +1,89 @@
+/* src/index.css */
+@import "tailwindcss";
+@import 'leaflet/dist/leaflet.css';
+@import "leaflet-draw/dist/leaflet.draw.css";
+
+/* Custom base styles */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Custom colors if needed */
+  --color-brand-50: #f0f9ff;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+}
+
+/* Ensure map container displays properly */
+.leaflet-container {
+  height: 100vh;
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(203 213 225) rgb(241 245 249);
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: rgb(241 245 249);
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgb(203 213 225);
+  border-radius: 2px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(148 163 184);
+}
+
+/* Focus styles */
+input:focus,
+button:focus {
+  outline: 2px solid rgb(59 130 246);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+/* Leaflet customizations */
+.leaflet-control-zoom a {
+  background-color: white;
+  color: rgb(55 65 81);
+  border: 1px solid rgb(209 213 219);
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: rgb(249 250 251);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.leaflet-popup-content {
+  margin: 1rem;
+  font-family: var(--font-sans);
+}
+.selected-area {
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+}
+
+.leaflet-interactive {
+  transition: all 0.2s ease-in-out;
+}
+
+.leaflet-interactive:hover {
+  filter: brightness(1.1);
+}
