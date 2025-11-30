@@ -1,15 +1,15 @@
 # AOI Creation Tool 
 
-This project implements an Area of Interest (AOI) creation tool using React, Leaflet, and Leaflet-Geoman. It enables users to draw, edit, and manage polygons and other shapes directly on an interactive map.
+This project implements an Area of Interest (AOI) creation tool using React, Leaflet, and Leaflet-Geoman. It enables users to draw, edit, and manage polygons and other shapes directly on an interactive map.<br/>
 
 ## Map Library Choice
 
-Selected Library: Leaflet + Leaflet-Geoman
-Leaflet was chosen because it offers:
+Selected Library: Leaflet + Leaflet-Geoman<br/>
+Leaflet was chosen because it offers:<br/>
 
--A lightweight, efficient mapping engine suitable for web applications.
--Excellent compatibility with React through react-leaflet.
--A strong plugin ecosystem, including Leaflet-Geoman, which provides ready-made geometry editing tools (drawing, editing, deleting, and snapping).
+-A lightweight, efficient mapping engine suitable for web applications.<br/>
+-Excellent compatibility with React through react-leaflet.<br/>
+-A strong plugin ecosystem, including Leaflet-Geoman, which provides ready-made geometry editing tools (drawing, editing, deleting, and snapping).<br/>
 
 ## Architecture Decisions
 ### Project Structure
@@ -17,10 +17,10 @@ Leaflet was chosen because it offers:
 <details>
 <summary>📁 Click to view project structure</summary>
 
-```
+
 src/
 ├── components/
-│   ├── Map/
+│   ├── map/
 │   │   ├── MapContainer.tsx
 │   │   ├── MapControls.tsx
 │   │   ├── DrawingTools.tsx
@@ -29,14 +29,13 @@ src/
 │   │   ├── MapEventHandler.tsx
 │   │   ├── MapController.tsx
 │   │   ├── CurrentDrawing.tsx
-│   │   └── LeafletFix.tsx
+│   │   |── LeafletFix.tsx
+|   |   |── FeatureLayer.tsx
+|   |   └── SearchSection.tsx
 │   ├── Layout/
-│   │   ├── Sidebar.tsx
-│   │   └── SearchSection.tsx
+│       └── Sidebar.tsx
 │   ├── UI/
-│   │   └── Button.tsx
-│   └── Search/
-│       └── SearchBox.tsx
+│       └── Button.tsx
 ├── services/
 │   ├── storageService.ts
 │   ├── wmsService.ts
@@ -51,39 +50,37 @@ src/
 ├── utils/
 │   └── mapHelpers.ts
 tests/
-└── e2e/
-    ├── aoi.spec.ts
+    |── example.spec.ts
     ├── draw-aoi.spec.ts
-    ├── reliable-aoi.spec.ts
     └── map-load.spec.ts
-```
+
 </details>
 
-Why This Architecture?
+Why This Architecture?<br/>
 
--Separation of concerns: Map rendering and UI are isolated for easier maintenance.
--Context API for shared state: Allows AOI data to be accessed anywhere without prop drilling.
--Utility functions: Geometry logic is extracted for easier testing.
--Test isolation: Ensures testability and supports CI pipelines.
+-Separation of concerns: Map rendering and UI are isolated for easier maintenance.<br/>
+-Context API for shared state: Allows AOI data to be accessed anywhere without prop drilling.<br/>
+-Utility functions: Geometry logic is extracted for easier testing.<br/>
+-Test isolation: Ensures testability and supports CI pipelines.<br/>
 
 ## ⚡ Performance Considerations
 
- Designed to scale toward thousands of points/polygons.
+ Designed to scale toward thousands of points/polygons.<br/>
 
 ### Implemented Strategies
 
--GeoJSON-based AOI storage (lightweight and efficient).
--Debounced state updates during AOI editing.
--Event-driven map updates (only the modified layer updates).
+-GeoJSON-based AOI storage (lightweight and efficient).<br/>
+-Debounced state updates during AOI editing.<br/>
+-Event-driven map updates (only the modified layer updates).<br/>
 
 ## 🧪 Testing Strategy
-What Is Currently Tested (Using Playwright)
+What Is Currently Tested (Using Playwright)<br/>
 
--Map successfully loads with a single Leaflet instance.
--Drawing controls render and are visible.
--User can create an AOI (polygon drawn on map).
--AOI appears in the sidebar after creation.
--These tests verify the most critical user flows.
+-Map successfully loads with a single Leaflet instance.<br/>
+-Drawing controls render and are visible.<br/>
+-User can create an AOI (polygon drawn on map).<br/>
+-AOI appears in the sidebar after creation.<br/>
+-These tests verify the most critical user flows.<br/>
 
 ## ⚖️ Trade-offs Made
 
@@ -96,26 +93,26 @@ What Is Currently Tested (Using Playwright)
 
 ## 🏁 Production Readiness
 
-For a production build, the following improvements are recommended:
+For a production build, the following improvements are recommended:<br/>
 
 ### Backend Enhancements
 
-Persistent storage using PostGIS, MongoDB (GeoJSON), or Tile38.
-AOI validation (prevent self-intersecting polygons).
+Persistent storage using PostGIS or MongoDB (GeoJSON).<br/>
+AOI validation (prevent self-intersecting polygons).<br/>
 
 ### Frontend Enhancements
 
-Error handling + user notifications.
-Offline caching.
-User authentication & role-based access for editing AOIs.
-Improved mobile gesture support.
-Switch to Canvas mode for rendering large datasets.
+Error handling + user notifications.<br/>
+Offline caching.<br/>
+User authentication & role-based access for editing AOIs.<br/>
+Improved mobile gesture support.<br/>
+Switch to Canvas mode for rendering large datasets.<br/>
 
 ### DevOps Enhancements
 
-Add CI testing (GitHub Actions).
-Add deployment pipeline (Vercel, AWS, Netlify).
-Automatic visual regression tests.
+Add CI testing (GitHub Actions).<br/>
+Add deployment pipeline (Vercel, AWS, Netlify).<br/>
+Automatic visual regression tests.<br/>
 
 ## ⏱️ Time Spent Breakdown
 
