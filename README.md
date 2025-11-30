@@ -14,10 +14,7 @@ Leaflet was chosen because it offers:<br/>
 ## Architecture Decisions
 ### Project Structure
 
-<details>
-<summary>📁 Click to view project structure</summary>
-
-
+```
 src/
 ├── components/
 │   ├── map/
@@ -53,8 +50,7 @@ tests/
     |── example.spec.ts
     ├── draw-aoi.spec.ts
     └── map-load.spec.ts
-
-</details>
+```
 
 Why This Architecture?<br/>
 
