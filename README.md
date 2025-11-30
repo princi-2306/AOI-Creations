@@ -2,7 +2,7 @@
 
 This project implements an Area of Interest (AOI) creation tool using React, Leaflet, and Leaflet-Geoman. It enables users to draw, edit, and manage polygons and other shapes directly on an interactive map.<br/>
 
-## Map Library Choice
+## 🗺️ Map Library Choice
 
 Selected Library: Leaflet + Leaflet-Geoman<br/>
 Leaflet was chosen because it offers:<br/>
@@ -11,7 +11,7 @@ Leaflet was chosen because it offers:<br/>
 -Excellent compatibility with React through react-leaflet.<br/>
 -A strong plugin ecosystem, including Leaflet-Geoman, which provides ready-made geometry editing tools (drawing, editing, deleting, and snapping).<br/>
 
-## Architecture Decisions
+## 🏛️ Architecture Decisions
 ### Project Structure
 
 ```
